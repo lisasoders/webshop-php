@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/../classes/Template.php';
+require_once __DIR__ . '/../classes/ProductsDatabase.php';
+require_once __DIR__ . '/../classes/UsersDatabase.php';
 
 
 //<kontrollera att användaren är inloggad som admin
@@ -11,6 +13,12 @@ if(!$is_admin)
    http_response_code(401);
    die("You are not authorized to access this page");  
 }
+
+$products_db = new ProductsDatabase();
+$users_db = new UsersDatabase();
+
+$users = $users_db->get_all();
+$products = $products_db->get_all();
 
 Template::header("Admin");
 
@@ -26,6 +34,19 @@ Template::header("Admin");
     <input type="submit" value="Save">
 </form>
 
+<hr>
+
+<h1>users</h1>
+
+<?php foreach ($users as $user) : ?>
+
+    <p>
+        <a href="/shop2/pages/admin-user.php?id=<?= $user->id ?>"><?= $user->username ?></a>
+        <i><?= $user->role ?></i>
+    </p>
+
+
+<?php endforeach; ?>
 
 
 

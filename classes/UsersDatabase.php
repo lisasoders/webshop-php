@@ -46,6 +46,26 @@ class UsersDatabase extends Database
         return $success;
 
     }
+        //update
+        public function update(User $user, $id) {
+            $query = 'UPDATE users SET username = ?, `role` = ? WHERE id = ?';
+    
+            $stmt = mysqli_prepare($this->conn, $query);
+    
+            $stmt->bind_param('ssi', $user->username, $user->role, $id);
+    
+            return $stmt->execute();
+        }
+        //delete
+        public function delete($id) {
+            $query = 'DELETE FROM users WHERE id = ?';
+    
+            $stmt = mysqli_prepare($this->conn, $query);
+    
+            $stmt->bind_param('i', $id);
+    
+            return $stmt->execute();
+        }
     //update
     //delete
 

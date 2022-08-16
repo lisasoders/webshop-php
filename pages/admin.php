@@ -43,6 +43,12 @@ Template::header("Admin");
     <p>
         <a href="/shop2/pages/admin-user.php?id=<?= $user->id ?>"><?= $user->username ?></a>
         <i><?= $user->role ?></i>
+
+        <form action="../admin-scripts/delete-user.php" method='post'>
+        <a href="edit-user.php?id=<?= $user->id ?>">Edit user</a>
+        <input type="hidden" name='id' value='<?= $user->id ?>'>
+        <input type="submit" value='Delete' >
+    </form>
     </p>
 
 

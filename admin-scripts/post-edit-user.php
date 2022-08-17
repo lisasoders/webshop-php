@@ -16,12 +16,12 @@ if(!$is_admin)
 
 $success = false;
 
-if(isset($_POST["username"]) && isset($_POST["role"]) && isset($_GET["id"])){
+if(isset($_POST["role"]) && isset($_GET["id"])){
 
     $user = $_SESSION['user'];
     $db = new UsersDatabase();
 
-    $user = new User($_POST['username'], $_POST['role'], $_GET['id']);
+    $user = new User($_POST['role'], $_GET['id']);
     
     $success = $db->update($user, $_GET["id"]);  
 
@@ -38,7 +38,7 @@ else{
 }
 
 if($success){
-   header("Location: /shop2/pages/products.php");
+   header("Location: /shop2/pages/admin.php");
    die();
 }
 else{

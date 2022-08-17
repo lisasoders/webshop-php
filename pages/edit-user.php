@@ -17,10 +17,15 @@ if($user === null): ?>
 
 
 <form action="/shop2/admin-scripts/post-edit-user.php?id=<?= $_GET["id"]?>" method="post">
-    <input type="text" name="username" placeholder="Username" value="<?= $user->username?>"><br>
-   <textarea name="role" placeholder="Role"><?= $user->role?></textarea><br>
-    <input type="submit" value="Save">
+<select name="role" id="">
+    <option value="" disabled selected hidden><?= $user->role ?></option>
+  <option value="admin">Admin</option>
+  <option value="customer">Customer</option>
+</select>
+<input type="submit" value="Save">
 </form>
+
+
 
 <?php 
 

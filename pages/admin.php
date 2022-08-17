@@ -45,11 +45,19 @@ Template::header("Admin");
         <i><?= $user->role ?></i>
 
         <form action="../admin-scripts/delete-user.php" method='post'>
-        <a href="edit-user.php?id=<?= $user->id ?>">Edit user</a>
         <input type="hidden" name='id' value='<?= $user->id ?>'>
         <input type="submit" value='Delete' >
     </form>
     </p>
+
+    <form action="/shop2/admin-scripts/post-edit-user.php?id=<?= $user->id?>" method="post">
+    <select name="role" id="">
+    <option value="" disabled selected hidden><?= $user->role ?></option>
+  <option value="admin">Admin</option>
+  <option value="customer">Customer</option>
+</select>
+<input type="submit" value="Save">
+</form>
 
 
 <?php endforeach; ?>

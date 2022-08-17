@@ -10,6 +10,8 @@ class Template
         $logged_in_user = $is_logged_in ? $_SESSION['user'] : null;
         $is_admin = $is_logged_in && $logged_in_user->role == 'admin';
 
+        $cart_count = isset($_SESSION["cart"]) ? count($_SESSION["cart"]) : 0;
+
 ?>
 
         <!DOCTYPE html>
@@ -29,6 +31,7 @@ class Template
             <nav>
                 <a href="/shop2">Start</a>
                 <a href="/shop2/pages/products.php">Products</a>
+                <a href="/shop2/pages/cart.php">Cart <?= $cart_count ?></a>
                 <?php if (!$is_logged_in) : ?>
                     <a href="/shop2/pages/login.php">Login</a>
                     <a href="/shop2/pages/register.php">Register</a>
@@ -57,6 +60,8 @@ class Template
             <footer>
                 <p>&copy; Lisa Söderberg 2022</p>
             </footer>
+
+            <script src="/shop2/assets/script.js"></script>
 
         </body>
 

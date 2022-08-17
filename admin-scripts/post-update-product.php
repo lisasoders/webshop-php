@@ -14,10 +14,9 @@ if(!$is_admin)
    die("You are not authorized to access this page");  
 }
 
-
 $success = false;
 
-if(isset($_POST["title"]) && isset($_POST["description"]) && isset($_POST["price"])){
+if(isset($_POST["title"]) && isset($_POST["description"]) && isset($_POST["price"]) && isset($_GET["id"])){
 
    $upload_directory = __DIR__ . "/../assets/uploads/"; // filnamn
 
@@ -42,7 +41,7 @@ if(isset($_POST["title"]) && isset($_POST["description"]) && isset($_POST["price
 
       $products_db = new ProductsDatabase;
 
-      $products_db->create($prodcut);
+      $products_db->update($prodcut, $_GET["id"]);
    }
 }
 else{
@@ -50,9 +49,9 @@ else{
 }
 
 if($success){
-   header("Location: /shop2/pages/admin.php");
+   header("Location: /shop2/pages/products.php");
    die();
 }
 else{
-   die("error saving product");
+   die("error update product");
 }

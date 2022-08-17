@@ -23,6 +23,19 @@ class UsersDatabase extends Database
     }
 
     //get_all
+    public function get_all() {
+        $query = "SELECT * FROM users";
+
+        $result = mysqli_query($this->conn, $query);
+        $db_users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        $users = [];
+        foreach ($db_users as $db_user) {
+            $user = new User($db_user["username"], $db_user["role"], $db_user["id"]);
+            $users[] = $user;
+
+        }
+        return $users;
+    }
     //create 
     public function create(User $user)
     {
@@ -32,6 +45,26 @@ class UsersDatabase extends Database
         $success = $stmt->execute();
         return $success;
 
+    }
+
+    public function update(User $user, $id) {
+        $query = 'UPDATE users SET username = ?, `role` = ? WHERE id = ?';
+
+        $stmt = mysqli_prepare($this->conn, $query);
+
+        $stmt->bind_param('ssi', $user->username, $user->role, $id);
+
+        return $stmt->execute();
+    }
+
+    public function delete($id) {
+        $query = 'DELETE FROM users WHERE id = ?';
+
+        $stmt = mysqli_prepare($this->conn, $query);
+
+        $stmt->bind_param('i', $id);
+
+        return $stmt->execute();
     }
     //update
     //delete

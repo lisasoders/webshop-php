@@ -14,30 +14,38 @@ Template::header("Cart"); ?>
 <p id="product-price"></p>
 </div>
 
+<div class='cart-items'>
+
 <?php
 
 foreach($products as $product) : ?>
 
-    <div>
-    <a href="single-product.php?id=<?= $product->id ?>">    <b><?= $product->title ?></b></a>
-    <i><?= $product->price ?></i>
-    <img src="<?= $product->img_url ?>" alt="image">
+    <div class='cart-product'>
+    <img src="<?= $product->img_url ?>" alt="image" class='cart-img'>
+    <a class='cart-title' href="single-product.php?id=<?= $product->id ?>">    <b><?= $product->title ?></b></a>
+    <i class='cart-price'><?= $product->price ?> kr</i>
 
-    <form action="/shop2/scripts/delete-from-cart.php" method="post">
-    <input type="hidden" name="product-id" value="<?= $product->id ?>">
-<input type="submit" value="delete from cart">
-</form>
-    
     </div>
     
     <?php
     
     endforeach; ?>
 
-<div>
-        <form action="" method="post">
-            <input type="submit" value="Checkout">
-        </form>
+<div class='cart-total-checkout'>
+    <p class='total'>Total</p>
+    <form action="/shop2/scripts/post-create-order.php" method="post">
+
+<input type="hidden" name="id" value="<?= $product->id ?>">
+
+
+
+<input type="submit" value="Checkout" class="btn add-to-cart-btn">
+
+</form>
     </div>
+
+    </div>
+
+    <?php
         
 Template::footer();

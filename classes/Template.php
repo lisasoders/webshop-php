@@ -34,6 +34,7 @@ class Template
                 <div class='nav-left'>
                 <a href="/shop2">Start</a>
                 <a href="/shop2/pages/products.php">Products</a>
+                <a href="/shop2/pages/my-orders.php">My orders</a>
                 
                 <?php if (!$is_logged_in) : ?>
                     <a href="/shop2/pages/login.php" class="btn">Login</a>
@@ -44,7 +45,7 @@ class Template
                 </div>
 
                 <div>
-                <a href="/shop2" class='logo'>Namn</a>
+                <a href="/shop2" class='logo'>ShoeShop</a>
                 </div>
 
                 <div class='nav-right'>
@@ -76,7 +77,7 @@ class Template
     public static function footer()
     { ?>
             <footer>
-                <p>&copy; Lisa Söderberg 2022</p>
+                <p>&copy; ShoeShop 2025</p>
             </footer>
 
             <script src="/shop2/assets/script.js"></script>

@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../classes/Product.php';
 require_once __DIR__ . '/../classes/Template.php';
-require_once __DIR__ . '/../scripts/delete-from-cart.php';
+
 
 $products = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
 
@@ -32,13 +32,10 @@ foreach($products as $product) : ?>
     endforeach; ?>
 
 <div class='cart-total-checkout'>
-    <p class='total'>Total</p>
+
     <form action="/shop2/scripts/post-create-order.php" method="post">
 
 <input type="hidden" name="id" value="<?= $product->id ?>">
-
-
-
 <input type="submit" value="Checkout" class="btn add-to-cart-btn">
 
 </form>

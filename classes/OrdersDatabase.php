@@ -34,15 +34,24 @@ class OrdersDatabase extends Database{
         return $order;
     }
 
-    public function get_all()
+
+
+    public function get_all($id)
 
     {
 
-        $query = "SELECT * FROM orders";
+        $query = "SELECT * FROM orders WHERE `user-id` = ?";
 
-        $result = mysqli_query($this->conn, $query);
 
-        $db_orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        $stmt = mysqli_prepare($this->conn, $query);
+
+        $stmt->bind_param('i', $id);
+
+        $stmt->execute();
+
+        $db_orders = $stmt->get_result();
+
+  
 
         $orders = [];
 
@@ -69,24 +78,24 @@ class OrdersDatabase extends Database{
     public function create(Order $order){
 
         $query = "INSERT INTO orders (`user-id`, `status`, `date`) VALUES (?, ?, ?)";
-
-
-
         $stmt = mysqli_prepare($this->conn, $query);
-
-
-
         $stmt->bind_param("iss", $order->user_id, $order->status, $order->date);
-
-
-
+        $products = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];
        $success = $stmt->execute();
 
+       $order->id = $this->conn->insert_id;
+       foreach ($products as $product) {
 
-
-       return $success;
-
-
+    
+       $query = "INSERT INTO orderproducts (`product-id`, `order-id`) VALUES (?, ?)";
+       $stmt = mysqli_prepare($this->conn, $query);
+       $stmt->bind_param("ii", $product->id, $order->id);
+      $success = $stmt->execute();
+      if(!$success) {
+          var_dump($stmt->error);
+          die;
+      }}
+      return $success;
 
 
     }

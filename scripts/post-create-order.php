@@ -26,6 +26,8 @@ if (isset($_SESSION["user"]) && isset($_SESSION["cart"])) {
 
 if($success){
 
+    $_SESSION["cart"] = [];
+
     header("Location: /shop2/pages/products.php");
 }
 

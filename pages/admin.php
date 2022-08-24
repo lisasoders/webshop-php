@@ -21,7 +21,7 @@ $orders_db = new OrdersDatabase();
 
 $users = $users_db->get_all();
 $products = $products_db->get_all();
-$orders = $orders_db->get_all();
+$orders = $orders_db->get_all($_SESSION["user"]->id);
 
 Template::header("Admin area");
 
@@ -72,6 +72,7 @@ Template::header("Admin area");
 
 
 <?php endforeach; ?>
+
 
 
 
